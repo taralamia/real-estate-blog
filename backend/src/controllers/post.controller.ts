@@ -17,3 +17,24 @@ export const createPost = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to create post" });
   }
 };
+export const getPosts = async (_req: Request, res: Response) => {
+  try {
+    const posts = await PostService.getAllPosts();
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch posts" });
+  }
+};
+export const getPost = async (req: Request, res: Response) => {
+  try {
+    const post = await PostService.getPostById(Number(req.params.id));
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch post" });
+  }
+};

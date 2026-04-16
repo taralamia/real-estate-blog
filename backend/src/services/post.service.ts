@@ -16,3 +16,16 @@ export const createPost = async (data: {
 
   return result.rows[0];
 };
+export const getAllPosts = async () => {
+  const result = await pool.query(
+    "SELECT * FROM posts ORDER BY created_at DESC"
+  );
+  return result.rows;
+};
+export const getPostById = async (id: number) => {
+  const result = await pool.query(
+    "SELECT * FROM posts WHERE id = $1",
+    [id]
+  );
+  return result.rows[0];
+};
