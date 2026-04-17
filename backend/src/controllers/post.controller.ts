@@ -10,20 +10,27 @@ export const createPost = async (req: Request, res: Response) => {
     }
 
     const post = await PostService.createPost({ title, description, image });
-
-    res.status(201).json(post);
+    
+    res.status(201).json({
+    success: true,
+    data: post,
+   });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to create post" });
-  }
+  console.error("Error in createPost:", error);
+  res.status(500).json({ message: "Failed to create post" });
+}
 };
 export const getPosts = async (_req: Request, res: Response) => {
   try {
     const posts = await PostService.getAllPosts();
-    res.json(posts);
+    res.json({
+    success: true,
+    data: posts,
+   });
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch posts" });
-  }
+  console.error("Error in getPosts:", error);
+  res.status(500).json({ message: "Failed to fetch posts" });
+}
 };
 export const getPost = async (req: Request, res: Response) => {
   try {
@@ -32,9 +39,15 @@ export const getPost = async (req: Request, res: Response) => {
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
-
-    res.json(post);
+        res.json({
+  success: true,
+  data: post,
+});
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch post" });
-  }
+  console.error("Error in getPost:", error);
+  res.status(500).json({
+  success: false,
+  message: "Failed to fetch posts",
+});
+}
 };
