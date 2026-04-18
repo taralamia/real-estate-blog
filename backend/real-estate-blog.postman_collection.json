@@ -1,0 +1,117 @@
+{
+  "info": {
+    "_postman_id": "33a17b56-24a2-49c9-9e5a-f61168d88bff",
+    "name": "real-estate-blog",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45337377",
+    "_collection_link": "https://go.postman.co/collection/45337377-33a17b56-24a2-49c9-9e5a-f61168d88bff?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "http://localhost:5000/api/posts/10",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/posts/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "posts",
+            "1"
+          ]
+        },
+        "description": "GET single post"
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:5000/api/posts",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "posts"
+          ]
+        },
+        "description": "GET all posts"
+      },
+      "response": []
+    },
+    {
+      "name": "https://real-estate-blog-20qs.onrender.com/api/posts",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"A1A Estate Company\",\r\n  \"description\": \"Let's dive into modern architecture.\",\r\n  \"image\": \"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://real-estate-blog-20qs.onrender.com/api/posts",
+          "protocol": "https",
+          "host": [
+            "real-estate-blog-20qs",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "https://real-estate-blog-20qs.onrender.com/api/posts",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://real-estate-blog-20qs.onrender.com/api/posts",
+          "protocol": "https",
+          "host": [
+            "real-estate-blog-20qs",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
