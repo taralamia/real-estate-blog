@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { API } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import PostCard from "../components/PostCard";
 
 type Post = {
   id: number;
@@ -8,10 +9,12 @@ type Post = {
   description: string;
   image?: string;
 };
+
 type ApiResponse<T> = {
   success: boolean;
   data: T;
 };
+
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +25,7 @@ export default function Home() {
     const fetchPosts = async () => {
       try {
         const res = await API.get<ApiResponse<Post[]>>("/posts");
-       setPosts(res.data.data); 
+        setPosts(res.data.data);
       } catch (err) {
         console.error("Failed to fetch posts:", err);
       } finally {
@@ -33,50 +36,60 @@ export default function Home() {
     fetchPosts();
   }, []);
 
-  if (loading) return <p>Loading posts...</p>;
+  if (loading) {
+    return <p style={{ padding: "20px" }}>Loading posts...</p>;
+  }
 
   return (
     <div
       style={{
         minHeight: "100vh",
         background: "linear-gradient(to right, #eef2f3, #8e9eab)",
-        padding: "20px",
+        padding: "40px",
       }}
     >
-      <h1>Real Estate Blog</h1>
-
-      <button onClick={() => navigate("/create")}>
-        Create Post
-      </button>
-
+      {/* 🔹 Header */}
       <div
         style={{
-          display: "grid",
-          gap: "10px",
-          marginTop: "20px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "30px",
         }}
       >
-        {posts.length === 0 ? (
-          <p>No posts available</p>
-        ) : (
-          posts.map((post) => (
-            <div
-              key={post.id}
-              onClick={() => navigate(`/post/${post.id}`)}
-              style={{
-                border: "1px solid #ccc",
-                padding: "10px",
-                cursor: "pointer",
-                borderRadius: "8px",
-                background: "#fff",
-              }}
-            >
-              <h3>{post.title}</h3>
-              <p>{post.description.slice(0, 100)}...</p>
-            </div>
-          ))
-        )}
+        <h1 style={{ margin: 0 }}>Real Estate Blog</h1>
+
+        <button
+          onClick={() => navigate("/create")}
+          style={{
+            padding: "10px 16px",
+            borderRadius: "8px",
+            border: "none",
+            background: "#333",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          + Create Post
+        </button>
       </div>
+
+      {/* 🔹 Content */}
+      {posts.length === 0 ? (
+        <p>No posts available</p>
+      ) : (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "20px",
+          }}
+        >
+          {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -40,7 +40,20 @@ export default function PostDetails() {
   return (
     <div style={{ padding: "20px" }}>
       <h1>{post.title}</h1>
-      {post.image && <img src={post.image} alt="" width="300" />}
+       {post.image ? (
+  <img
+    src={post.image}
+    alt={post.title}
+    width="300"
+    style={{ marginTop: "10px", borderRadius: "8px" }}
+    onError={(e) => {
+      console.log("Image failed to load");
+      (e.target as HTMLImageElement).style.display = "none";
+    }}
+  />
+) : (
+  <p>No image available</p>
+)}
       <p>{post.description}</p>
     </div>
   );
